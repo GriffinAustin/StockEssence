@@ -1,4 +1,4 @@
-import ratio        #Handle
+import ratio        # Stock ratio calculations (See this for more info https://www.investopedia.com/articles/stocks/06/ratios.asp)
 import stockdata    #Retrieve stock information
 
 import json         #Parse json
