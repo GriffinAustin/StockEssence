@@ -4,7 +4,7 @@ def profit_margin(netIncome, revenue):
 def earnings_per_share(profit, numOutstandingShares):
     return(profit / numOutstandingShares) #Profit from fiscal year
 
-def earnings_per_share_growth(finalEarningsPerShare, initalEarningsPerShare):
+def earnings_per_share_growth(finalEarningsPerShare, initialEarningsPerShare):
     return((finalEarningsPerShare - initialEarningsPerShare) / initialEarningsPerShare)
 
 def price_to_earnings(stockPrice, earningsPerShare):
