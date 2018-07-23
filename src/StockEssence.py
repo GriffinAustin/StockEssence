@@ -8,6 +8,10 @@ import configparser #Read/Write data file
 
 import timeit       #Benchmarking
 
+import os
+dir = os.path.dirname(__file__)
+data_ini = os.path.join(dir, 'data', 'data.ini')
+
 def get_stock_symbols(file):
     '''Reads txt file and returns first
     grouped characters'''
@@ -21,22 +25,22 @@ def process_config(file, companyList):
     '''Reads and writes data file'''
     now = datetime.datetime.now()
     parser = configparser.ConfigParser()
-    parser.read('data\data.ini')
+    parser.read(data_ini)
 
     if parser.get('TimeData', 'LastDay') == 'NULL' or int(parser.get('TimeData', 'LastDay')) != now.timetuple().tm_yday:
         parser.set('TimeData', 'LastDay', str(now.timetuple().tm_yday))
-        with open('data\data.ini', 'w') as cfg:
+        with open(data_ini, 'w') as cfg:
             parser.write(cfg)
     
     # Processes number of days since last load
     if parser.get('TimeData', 'LastLoad') == 'NULL' or int(parser.get('TimeData', 'lastload')) > 30:      
-        write_json('data\companydata.json', companyList) #Load protocol
+        write_json(os.path.join(dir, 'data', 'companydata.json'), companyList) #Load protocol
         parser.set('TimeData', 'LastLoad', '0')
-        with open('data\data.ini', 'w') as cfg:
+        with open(data_ini, 'w') as cfg:
             parser.write(cfg)
     elif int(parser.get('TimeData', 'LastLoad')) <= 30 and int(parser.get('TimeData', 'LastDay')) != now.timetuple().tm_yday:
         parser.set('TimeData', 'LastLoad', str(int(parser.get('TimeData', 'LastLoad')) + 1))
-        with open('data\data.ini', 'w') as cfg:
+        with open(data_ini, 'w') as cfg:
             parser.write(cfg)
 
 def write_json(file, companiesList):
@@ -45,13 +49,15 @@ def write_json(file, companiesList):
     data['Companies'] = []
     for company in companiesList:
         try:
+            companyStatement = stockdata.company_info(company)
+            stock = stockdata.share_info(company)
             data['Companies'].append({
-                'Symbol': str(company),
-                'Net Income': str(stockdata.get_net_income(company)),
-                'Revenue': str(stockdata.get_revenue(company)),
-                'Gross Profit': str(stockdata.get_gross_profit(company)),
-                'Stock Price': str(stockdata.get_stock_price(company)),
-                'Number of Outstanding Shares': str(stockdata.get_outstanding_shares(company))
+                'Symbol': company,
+                'Net Income': companyStatement.get_net_income(),
+                'Revenue': companyStatement.get_revenue(),
+                'Gross Profit': companyStatement.get_gross_profit(),
+                'Stock Price': str(stock.get_share_price()),
+                'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares()))))
             })
             print(company, 'done')
         except:
@@ -64,8 +70,8 @@ def write_json(file, companiesList):
 def main():
     start = timeit.default_timer()
 
-    companies = get_stock_symbols("data\snp500.txt")
-    process_config('data\data.ini', companies)
+    companies = get_stock_symbols(os.path.join(dir, 'data','snp500.txt'))
+    process_config(data_ini, companies)
     
     stop = timeit.default_timer()
     print("run time:", stop-start, "seconds")
