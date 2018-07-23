@@ -36,3 +36,10 @@ def get_stock_price(symbol):
     c = remove_suffix(remove_prefix(r.text, '<pre>'), '<pre>')
     d = json.loads(c)
     return(d[str(symbol)]['price'])
+
+def get_outstanding_shares(symbol):
+    url = "https://financialmodelingprep.com/api/company/profile/" + str(symbol)
+    r = requests.get(url)
+    c = remove_suffix(remove_prefix(r.text, '<pre>'), '<pre>')
+    d = json.loads(c)
+    return(str(int(d[str(symbol)]['MktCap']) / int(d[str(symbol)]['Price'])))
