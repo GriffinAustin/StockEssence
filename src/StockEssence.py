@@ -50,7 +50,8 @@ def write_json(file, companiesList):
                 'Net Income': str(stockdata.get_net_income(company)),
                 'Revenue': str(stockdata.get_revenue(company)),
                 'Gross Profit': str(stockdata.get_gross_profit(company)),
-                'Stock Price': str(stockdata.get_stock_price(company))
+                'Stock Price': str(stockdata.get_stock_price(company)),
+                'Number of Outstanding Shares': str(stockdata.get_outstanding_shares(company))
             })
             print(company, 'done')
         except:
