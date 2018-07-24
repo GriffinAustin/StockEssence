@@ -57,11 +57,15 @@ def write_json(file, companiesList):
                 'Revenue': companyStatement.get_revenue(),
                 'Gross Profit': companyStatement.get_gross_profit(),
                 'Stock Price': str(stock.get_share_price()),
-                'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares()))))
+                'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares())))),
+                'Profit Margin': str(int(companyStatement.get_net_income()) / int(companyStatement.get_revenue())),
+                'Earnings Per Share': str(ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))),
+                'Price to Earnings': str(ratio.price_to_earnings(float(stock.get_share_price()), ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))))
             })
             print(company, 'done')
         except:
             print(company, 'failed')
+        print(int(companiesList.index(company))+1, "/", len(companiesList))
     with open(file, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
@@ -70,7 +74,7 @@ def write_json(file, companiesList):
 def main():
     start = timeit.default_timer()
 
-    companies = get_stock_symbols(os.path.join(dir, 'data','snp500.txt'))
+    companies = get_stock_symbols(os.path.join(dir, 'data', 'snp500.txt'))
     process_config(data_ini, companies)
     
     stop = timeit.default_timer()
