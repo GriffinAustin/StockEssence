@@ -1,17 +1,16 @@
 import ratio        # Stock ratio calculations (See this for more info https://www.investopedia.com/articles/stocks/06/ratios.asp)
-import stockdata    # Retrieve stock information
+import stockdata    #Retrieve stock information
 
-import json         # Parse json
+import json         #Parse json
 
-import datetime     # Calculate current date
-import configparser # Read/Write data file
+import datetime     #Calculate current date
+import configparser #Read/Write data file
 
-import timeit       # Benchmarking
+import timeit       #Benchmarking
 
 import os
 dir = os.path.dirname(__file__)
-data_ini = os.path.join(dir, 'data', 'data.ini') #Config file
-read_file = 'my_companies.txt' #Name of company list to read from (Must be in src/data/)
+data_ini = os.path.join(dir, 'data', 'data.ini')
 
 def get_stock_symbols(file):
     '''Reads txt file and returns first
@@ -34,7 +33,7 @@ def process_config(file, companyList):
             parser.write(cfg)
     
     # Processes number of days since last load
-    if parser.get('TimeData', 'LastLoad') == 'NULL' or int(parser.get('TimeData', 'lastload')) >= 30:      
+    if parser.get('TimeData', 'LastLoad') == 'NULL' or int(parser.get('TimeData', 'lastload')) > 30:      
         write_json(os.path.join(dir, 'data', 'companydata.json'), companyList) #Load protocol
         parser.set('TimeData', 'LastLoad', '0')
         with open(data_ini, 'w') as cfg:
@@ -53,22 +52,16 @@ def write_json(file, companiesList):
             companyStatement = stockdata.company_info(company)
             stock = stockdata.share_info(company)
             data['Companies'].append({
-                'Updated': str(datetime.date.today()),
                 'Symbol': company,
                 'Net Income': companyStatement.get_net_income(),
                 'Revenue': companyStatement.get_revenue(),
                 'Gross Profit': companyStatement.get_gross_profit(),
                 'Stock Price': str(stock.get_share_price()),
-                'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares())))),
-                'Net Profit Margin': str(ratio.margin(int(companyStatement.get_net_income()), int(companyStatement.get_revenue()))),
-                'Gross Profit Margin': str(ratio.margin(int(companyStatement.get_gross_profit()), int(companyStatement.get_revenue()))),
-                'Earnings Per Share': str(ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))),
-                'Price to Earnings': str(ratio.price_to_earnings(float(stock.get_share_price()), ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))))
+                'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares()))))
             })
             print(company, 'done')
         except:
             print(company, 'failed')
-        print(int(companiesList.index(company))+1, "/", len(companiesList))
     with open(file, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
@@ -77,7 +70,7 @@ def write_json(file, companiesList):
 def main():
     start = timeit.default_timer()
 
-    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
+    companies = get_stock_symbols(os.path.join(dir, 'data','snp500.txt'))
     process_config(data_ini, companies)
     
     stop = timeit.default_timer()

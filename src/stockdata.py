@@ -18,17 +18,17 @@ class company_info(object):
     def get_net_income(self):
         '''Returns net income of stock in
         the past twelve months'''
-        return(str(int(self.d[str(self.symbol)]['Net income']['TTM']) * 1000000))
+        return(self.d[str(self.symbol)]['Net income']['TTM'])
 
     def get_revenue(self):
         '''Returns revenue of stock in
         the past twelve months'''
-        return(str(int(self.d[str(self.symbol)]['Revenue']['TTM']) * 1000000))
+        return(self.d[str(self.symbol)]['Revenue']['TTM'])
 
     def get_gross_profit(self):
         '''Returns gross profit of stock in
         the past twelve months'''
-        return(str(int(self.d[str(self.symbol)]['Gross profit']['TTM']) * 1000000))
+        return(self.d[str(self.symbol)]['Gross profit']['TTM'])
 
 class share_info(object):
     def __init__(self, symbol):
