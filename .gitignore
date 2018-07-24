@@ -1,0 +1,6 @@
+
+.vscode/settings.json
+*.pyc
+*.pyc
+src/__pycache__/ratio.cpython-36.pyc
+src/__pycache__/stockdata.cpython-36.pyc

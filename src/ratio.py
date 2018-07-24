@@ -1,5 +1,5 @@
-def profit_margin(netIncome, revenue):
-    return(netIncome / revenue) #revenue = net sales
+def margin(difference, final):
+    return(difference / final)
 
 def earnings_per_share(profit, numOutstandingShares):
     return(profit / numOutstandingShares) #Profit from fiscal year
