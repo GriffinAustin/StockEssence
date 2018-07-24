@@ -1,0 +1,22 @@
+List of symbols to retrieve data from (DO NOT EDIT THIS LINE; One company per line)
+AAPL
+MSFT
+AMZN
+GOOG
+GOOGL
+FB
+JPM
+XOM
+JNJ
+BAC
+INTC
+WFC
+V
+CVX
+UNH
+HD
+PFE
+CSCO
+T
+VZ
+BA
