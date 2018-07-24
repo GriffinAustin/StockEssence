@@ -10,8 +10,8 @@ import timeit       # Benchmarking
 
 import os
 dir = os.path.dirname(__file__)
-data_ini = os.path.join(dir, 'data', 'data.ini') #Config file
-read_file = 'my_companies.txt' #Name of company list to read from (Must be in src/data/)
+data_ini = os.path.join(dir, 'data', 'data.ini') # Config file
+read_file = 'my_companies.txt' # Name of company list to read from (Must be in src/data/)
 
 def get_stock_symbols(file):
     '''Reads txt file and returns first
@@ -60,12 +60,8 @@ def write_json(file, companiesList):
                 'Gross Profit': companyStatement.get_gross_profit(),
                 'Stock Price': str(stock.get_share_price()),
                 'Number of Outstanding Shares': str(int(round(float(stock.get_number_of_outstanding_shares())))),
-<<<<<<< HEAD
                 'Net Profit Margin': str(ratio.margin(int(companyStatement.get_net_income()), int(companyStatement.get_revenue()))),
                 'Gross Profit Margin': str(ratio.margin(int(companyStatement.get_gross_profit()), int(companyStatement.get_revenue()))),
-=======
-                'Profit Margin': str(int(companyStatement.get_net_income()) / int(companyStatement.get_revenue())),
->>>>>>> dc6b5cf1f09cbb657f4e2eb8033837fc058fed69
                 'Earnings Per Share': str(ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))),
                 'Price to Earnings': str(ratio.price_to_earnings(float(stock.get_share_price()), ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))))
             })
@@ -81,11 +77,7 @@ def write_json(file, companiesList):
 def main():
     start = timeit.default_timer()
 
-<<<<<<< HEAD
     companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
-=======
-    companies = get_stock_symbols(os.path.join(dir, 'data', 'snp500.txt'))
->>>>>>> dc6b5cf1f09cbb657f4e2eb8033837fc058fed69
     process_config(data_ini, companies)
     
     stop = timeit.default_timer()
