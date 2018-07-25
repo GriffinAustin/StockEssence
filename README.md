@@ -37,11 +37,13 @@ $ pip install requests
 Simply clone or download repository
 
 ## Usage
+Edit the list in src/data/my_companies.txt (One company symbol per line, leave the first line alone)
+
+Navigate to the /src/ folder
 ```
-$ cd <location of StockEssence>
 $ python StockEssence.py
 ```
-*Note: Initial launch may take up to 15 minutes as it fetches all data from API*
+*Note: Initial load may take up to 1 second per symbol*
 
 ## Built With
 
