@@ -14,10 +14,5 @@ def price_to_earnings_growth(priceToEarnings, earningsPerShareGrowth):
     return(priceToEarnings / earningsPerShareGrowth) #Lower is better
 
 def decimal_to_percentage(decVal):
-    decStr = str(decVal * 100)
-    finalStr = ""
-    if(decVal >= 0.1):
-        finalStr = decStr[:4] + "%"
-    elif(decVal < 0.1):
-        finalStr = decStr[:3] + "%"
-    return finalStr
+    perCent = round(decVal * 100,ndigits=2)
+    return "{}%".format(perCent)
