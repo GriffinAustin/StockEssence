@@ -4,3 +4,5 @@
 *.pyc
 src/__pycache__/ratio.cpython-36.pyc
 src/__pycache__/stockdata.cpython-36.pyc
+src/data/data.ini
+src/data/companydata.json

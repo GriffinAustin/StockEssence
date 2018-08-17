@@ -47,7 +47,7 @@ def process_config(file, companyList):
 def write_json(file, companiesList):
     '''Logs company data to file for increased speed in future loads'''
     data = {}
-    data['Companies'] = []
+    data['Companies'] = []    
     for company in companiesList:
         try:
             companyStatement = stockdata.company_info(company)
