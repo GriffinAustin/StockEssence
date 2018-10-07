@@ -31,9 +31,10 @@ Install Python requests module:
 ```
 $ pip install requests
 ```
-Install Python Kivy module:
+Install Python kivy module & dependencies:
 ```
 $ pip install kivy
+$ pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
 ```
 
 ### Installing
