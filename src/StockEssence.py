@@ -1,6 +1,16 @@
 import ratio        # Stock ratio calculations (See this for more info https://www.investopedia.com/articles/stocks/06/ratios.asp)
 import stockdata    # Retrieve stock information
 
+import kivy
+kivy.require('1.0.7')
+
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+
+import threading
+
 import json         # Parse json
 
 import datetime     # Calculate current date
@@ -68,7 +78,10 @@ def write_json(file, companiesList):
             print(company, 'done')
         except:
             print(company, 'failed')
-        print(int(companiesList.index(company))+1, "/", len(companiesList))
+        index = int(companiesList.index(company))+1
+        print(index, "/", len(companiesList))
+        MainView.progress.text = str(index) + "/" + str(len(companiesList))
+        MainView.company.text = str(company)
     with open(file, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
@@ -83,5 +96,23 @@ def main():
     stop = timeit.default_timer()
     print("run time:", stop-start, "seconds")
 
+class MainView(BoxLayout):
+    progress = Label()
+    company = Label()
+    def __init__(self, **kwargs):
+        super(MainView, self).__init__(**kwargs)
+
+        self.add_widget(self.progress)
+        self.add_widget(self.company)
+
+class StockEssence(App):
+    def build(self):
+        return MainView()
+
+def run_app():
+    StockEssence().run()
+
 if __name__ == "__main__":
-    main()
+    mainThread = threading.Thread(target=main)
+    mainThread.start()
+    run_app()
