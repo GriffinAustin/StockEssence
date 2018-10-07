@@ -31,6 +31,10 @@ Install Python requests module:
 ```
 $ pip install requests
 ```
+Install Python Kivy module:
+```
+$ pip install kivy
+```
 
 ### Installing
 
