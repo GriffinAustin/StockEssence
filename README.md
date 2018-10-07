@@ -52,6 +52,7 @@ $ python StockEssence.py
 ## Built With
 
 * [Requests module for Python](http://docs.python-requests.org/en/master/) - Web API calls
+* [kivy module for Python](https://kivy.org/) - GUI
 * [Financial Modeling Prep](https://financialmodelingprep.com/) - Stock Data
 
 ## Contributing
