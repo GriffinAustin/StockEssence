@@ -7,7 +7,7 @@ Displays data and ratios of stocks and rates them via API
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -31,6 +31,11 @@ Install Python requests module:
 ```
 $ pip install requests
 ```
+Install Python kivy module & dependencies:
+```
+$ pip install kivy
+$ pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
+```
 
 ### Installing
 
@@ -48,6 +53,7 @@ $ python StockEssence.py
 ## Built With
 
 * [Requests module for Python](http://docs.python-requests.org/en/master/) - Web API calls
+* [kivy module for Python](https://kivy.org/) - GUI
 * [Financial Modeling Prep](https://financialmodelingprep.com/) - Stock Data
 
 ## Contributing
