@@ -8,6 +8,11 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.config import Config
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '600')
+Config.set('graphics', 'resizable', False)
+Config.write()
 
 import threading
 
@@ -91,7 +96,6 @@ def write_json(file, companiesList):
     MainView.company.text = ""
             
 def datar(file, companyList):
-    
     subThread = threading.Thread(target=lambda *args: write_json(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
     subThread.start();
 
@@ -106,7 +110,6 @@ def main():
     print("run time:", stop-start, "seconds")
 
 class MainView(BoxLayout):
-    #subThread = threading.Thread(target=lambda *args: write_json(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
     companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
     progress = Label()
     company = Label()
@@ -119,11 +122,14 @@ class MainView(BoxLayout):
         self.add_widget(self.getData)
 
 class StockEssence(App):
+    icon = 'StockEssence_logo.ico'
     def build(self):
         return MainView()
 
 def run_app():
+    
     StockEssence().run()
+    systray.shutdown()
 
 if __name__ == "__main__":
     mainThread = threading.Thread(target=main)
