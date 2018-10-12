@@ -56,6 +56,7 @@ def process_config(file, companyList):
 
 def write_json(file, companiesList):
     '''Logs company data to file for increased speed in future loads'''
+    MainView.getData.disabled = True;
     data = {}
     data['Companies'] = []    
     for company in companiesList:
@@ -85,25 +86,37 @@ def write_json(file, companiesList):
     with open(file, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
+    MainView.getData.disabled = False;
+    MainView.progress.text = "Complete"
+    MainView.company.text = ""
             
+def datar(file, companyList):
+    
+    subThread = threading.Thread(target=lambda *args: write_json(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
+    subThread.start();
 
 def main():
     start = timeit.default_timer()
 
-    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
-    process_config(data_ini, companies)
+    #companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
+    #process_config(data_ini, companies)
+    #write_json(os.path.join(dir, 'data', 'companydata.json'), companies) #Load protocol
     
     stop = timeit.default_timer()
     print("run time:", stop-start, "seconds")
 
 class MainView(BoxLayout):
+    #subThread = threading.Thread(target=lambda *args: write_json(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
+    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
     progress = Label()
     company = Label()
+    getData = Button(text="Get data", on_press=lambda *args: datar(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
     def __init__(self, **kwargs):
         super(MainView, self).__init__(**kwargs)
 
         self.add_widget(self.progress)
         self.add_widget(self.company)
+        self.add_widget(self.getData)
 
 class StockEssence(App):
     def build(self):
