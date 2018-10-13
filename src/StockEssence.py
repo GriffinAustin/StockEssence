@@ -1,19 +1,6 @@
 import ratio        # Stock ratio calculations (See this for more info https://www.investopedia.com/articles/stocks/06/ratios.asp)
 import stockdata    # Retrieve stock information
 
-import kivy
-kivy.require('1.0.7')
-
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.config import Config
-Config.set('graphics', 'width', '800')
-Config.set('graphics', 'height', '600')
-Config.set('graphics', 'resizable', False)
-Config.write()
-
 import threading
 
 import json         # Parse json
@@ -37,31 +24,8 @@ def get_stock_symbols(file):
             companies.append(line.split()[0])
     return companies[1:]
 
-def process_config(file, companyList):
-    '''Reads and writes data file'''
-    now = datetime.datetime.now()
-    parser = configparser.ConfigParser()
-    parser.read(data_ini)
-
-    if parser.get('TimeData', 'LastDay') == 'NULL' or int(parser.get('TimeData', 'LastDay')) != now.timetuple().tm_yday:
-        parser.set('TimeData', 'LastDay', str(now.timetuple().tm_yday))
-        with open(data_ini, 'w') as cfg:
-            parser.write(cfg)
-    
-    # Processes number of days since last load
-    if parser.get('TimeData', 'LastLoad') == 'NULL' or int(parser.get('TimeData', 'lastload')) >= 30:      
-        write_json(os.path.join(dir, 'data', 'companydata.json'), companyList) #Load protocol
-        parser.set('TimeData', 'LastLoad', '0')
-        with open(data_ini, 'w') as cfg:
-            parser.write(cfg)
-    elif int(parser.get('TimeData', 'LastLoad')) <= 30 and int(parser.get('TimeData', 'LastDay')) != now.timetuple().tm_yday:
-        parser.set('TimeData', 'LastLoad', str(int(parser.get('TimeData', 'LastLoad')) + 1))
-        with open(data_ini, 'w') as cfg:
-            parser.write(cfg)
-
 def write_json(file, companiesList):
     '''Logs company data to file for increased speed in future loads'''
-    MainView.getData.disabled = True;
     data = {}
     data['Companies'] = []    
     for company in companiesList:
@@ -86,52 +50,19 @@ def write_json(file, companiesList):
             print(company, 'failed')
         index = int(companiesList.index(company))+1
         print(index, "/", len(companiesList))
-        MainView.progress.text = str(index) + "/" + str(len(companiesList))
-        MainView.company.text = str(company)
     with open(file, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
-    MainView.getData.disabled = False;
-    MainView.progress.text = "Complete"
-    MainView.company.text = ""
-            
-def datar(file, companyList):
-    subThread = threading.Thread(target=lambda *args: write_json(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
-    subThread.start();
 
 def main():
     start = timeit.default_timer()
 
-    #companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
-    #process_config(data_ini, companies)
-    #write_json(os.path.join(dir, 'data', 'companydata.json'), companies) #Load protocol
+    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
+    write_json(os.path.join(dir, 'data', 'companydata.json'), companies) #Load protocol
     
     stop = timeit.default_timer()
     print("run time:", stop-start, "seconds")
 
-class MainView(BoxLayout):
-    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
-    progress = Label()
-    company = Label()
-    getData = Button(text="Get data", on_press=lambda *args: datar(os.path.join(dir, 'data', 'companydata.json'), MainView.companies))
-    def __init__(self, **kwargs):
-        super(MainView, self).__init__(**kwargs)
-
-        self.add_widget(self.progress)
-        self.add_widget(self.company)
-        self.add_widget(self.getData)
-
-class StockEssence(App):
-    icon = 'StockEssence_logo.ico'
-    def build(self):
-        return MainView()
-
-def run_app():
-    
-    StockEssence().run()
-    systray.shutdown()
-
 if __name__ == "__main__":
     mainThread = threading.Thread(target=main)
     mainThread.start()
-    run_app()
