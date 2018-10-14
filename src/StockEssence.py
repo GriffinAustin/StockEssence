@@ -6,7 +6,6 @@ import threading
 import json         # Parse json
 
 import datetime     # Calculate current date
-import configparser # Read/Write data file
 
 import timeit       # Benchmarking
 
