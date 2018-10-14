@@ -10,11 +10,6 @@ import configparser # Read/Write data file
 
 import timeit       # Benchmarking
 
-import os
-dir = os.path.dirname(__file__)
-data_ini = os.path.join(dir, 'data', 'data.ini') # Config file
-read_file = 'my_companies.txt' # Name of company list to read from (Must be in src/data/)
-
 def get_stock_symbols(file):
     '''Reads txt file and returns first
     grouped characters'''
@@ -57,8 +52,8 @@ def write_json(file, companiesList):
 def main():
     start = timeit.default_timer()
 
-    companies = get_stock_symbols(os.path.join(dir, 'data', read_file))
-    write_json(os.path.join(dir, 'data', 'companydata.json'), companies) #Load protocol
+    companies = get_stock_symbols('companylist.txt')
+    write_json('companydata.json', companies) #Load protocol
     
     stop = timeit.default_timer()
     print("run time:", stop-start, "seconds")

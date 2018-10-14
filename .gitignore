@@ -9,3 +9,10 @@ src/data/companydata.json
 *.pyc
 src/data/data.ini
 src/data/my_companies.txt
+*.xml
+*.iml
+.vs/ProjectSettings.json
+*.sqlite
+.vs/StockEssence/v15/.suo
+.vs/VSWorkspaceState.json
+*.pyc

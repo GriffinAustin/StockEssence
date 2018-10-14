@@ -1,0 +1,69 @@
+{
+    "Companies": [
+        {
+            "Updated": "2018-10-13",
+            "Symbol": "AAPL",
+            "Net Income": "50525000000",
+            "Revenue": "239176000000",
+            "Gross Profit": "91922000000",
+            "Stock Price": "222.11",
+            "Number of Outstanding Shares": "3769854524",
+            "Net Profit Margin": "0.21124611164999832",
+            "Gross Profit Margin": "0.3843278589825066",
+            "Earnings Per Share": "24.383434274893045",
+            "Price to Earnings": "9.10905319964303"
+        },
+        {
+            "Updated": "2018-10-13",
+            "Symbol": "MSFT",
+            "Net Income": "9544000000",
+            "Revenue": "95652000000",
+            "Gross Profit": "59794000000",
+            "Stock Price": "109.51",
+            "Number of Outstanding Shares": "6158421476",
+            "Net Profit Margin": "0.09977836323338769",
+            "Gross Profit Margin": "0.6251202274913227",
+            "Earnings Per Share": "9.709306230047737",
+            "Price to Earnings": "11.278869715850087"
+        },
+        {
+            "Updated": "2018-10-13",
+            "Symbol": "AMZN",
+            "Net Income": "3033000000",
+            "Revenue": "177866000000",
+            "Gross Profit": "65932000000",
+            "Stock Price": "1788.97",
+            "Number of Outstanding Shares": "404928042",
+            "Net Profit Margin": "0.01705216286417865",
+            "Gross Profit Margin": "0.3706835482891615",
+            "Earnings Per Share": "162.82399144026365",
+            "Price to Earnings": "10.987140065635423"
+        },
+        {
+            "Updated": "2018-10-13",
+            "Symbol": "FB",
+            "Net Income": "15934000000",
+            "Revenue": "40653000000",
+            "Gross Profit": "35199000000",
+            "Stock Price": "153.76",
+            "Number of Outstanding Shares": "3026327260",
+            "Net Profit Margin": "0.39195139350109465",
+            "Gross Profit Margin": "0.8658401593978304",
+            "Earnings Per Share": "11.63092982783074",
+            "Price to Earnings": "13.219923280087182"
+        },
+        {
+            "Updated": "2018-10-13",
+            "Symbol": "PG",
+            "Net Income": "10085000000",
+            "Revenue": "65732000000",
+            "Gross Profit": "32701000000",
+            "Stock Price": "79.06",
+            "Number of Outstanding Shares": "2422397359",
+            "Net Profit Margin": "0.15342603298241345",
+            "Gross Profit Margin": "0.49748980709547863",
+            "Earnings Per Share": "13.499436781157868",
+            "Price to Earnings": "5.856540630669104"
+        }
+    ]
+}
