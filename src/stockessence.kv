@@ -1,0 +1,16 @@
+#: kivy 1.10.1
+#:set width 800
+#:set height 600
+
+<InitButton@Button>:
+    font_size: 16
+    color: 0, 0, 0, 1
+    size: 150, 50
+    background_normal: ''
+    background_color: .88, .88, .88, 1
+
+<StockEssence>:
+    InitButton:
+        pos: width / 2 - self.width / 2, height / 2 - self.height / 2
+        text: 'Retrieve Data'
+        on_press: root.init()

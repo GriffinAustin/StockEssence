@@ -9,6 +9,36 @@ import datetime     # Calculate current date
 
 import timeit       # Benchmarking
 
+import kivy
+kivy.require('1.10.1')
+
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.config import Config
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '600')
+Config.write()
+
+class StockEssence(Widget):
+    def init(self):
+        mainThread = threading.Thread(target=StockEssenceApp().main, args=(self,))
+        mainThread.start()
+
+class StockEssenceApp(App):
+    def build(self):
+        return StockEssence()
+
+    def main(self, btn):
+        start = timeit.default_timer()
+        btn.disabled = True
+        companies = get_stock_symbols('companylist.txt')
+        write_json('companydata.json', companies)  # Load protocol
+        btn.disabled = False
+
+        stop = timeit.default_timer()
+        print("run time:", stop - start, "seconds")
+
+
 def get_stock_symbols(file):
     '''Reads txt file and returns first
     grouped characters'''
@@ -48,15 +78,10 @@ def write_json(file, companiesList):
             json.dump(data, outfile, indent=4)
             print("wrote to json")
 
-def main():
-    start = timeit.default_timer()
+def init():
+    StockEssenceApp().run()
 
-    companies = get_stock_symbols('companylist.txt')
-    write_json('companydata.json', companies) #Load protocol
-    
-    stop = timeit.default_timer()
-    print("run time:", stop-start, "seconds")
 
 if __name__ == "__main__":
-    mainThread = threading.Thread(target=main)
-    mainThread.start()
+    guiThread = threading.Thread(target=init)
+    guiThread.start()
