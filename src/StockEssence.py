@@ -15,9 +15,13 @@ kivy.require('1.10.1')
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.config import Config
+from kivy.core.text import LabelBase
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 Config.write()
+
+# Register fonts
+LabelBase.register(name='OpenSans', fn_regular="OpenSans-Regular.ttf")
 
 class StockEssence(Widget):
     def init(self):

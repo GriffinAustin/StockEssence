@@ -1,16 +1,37 @@
 #: kivy 1.10.1
-#:set width 800
-#:set height 600
+#:set WIDTH 800
+#:set HEIGHT 600
 
-<InitButton@Button>:
-    font_size: 16
-    color: 0, 0, 0, 1
-    size: 150, 50
+<DefButton@Button>:
+    #:set WIDTH_ADDER 16
+    #:set HEIGHT_MULTIPLIER 1.5625
+    font_size: 32
+    font_name: 'OpenSans'
+    width: self.texture_size[0] + WIDTH_ADDER # Auto scale width
+    height: self.font_size * HEIGHT_MULTIPLIER  # Auto scale height
     background_normal: ''
-    background_color: .88, .88, .88, 1
+    background_down: ''
+    background_color: (.83, .83, .83, 0)
+    color: .44, .44, .44, 1
+    canvas.before:
+        Color:
+            rgba: (.83,.83,.83,1) if self.state=='normal' else (.73, .73, .73, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [4,]
 
 <StockEssence>:
-    InitButton:
-        pos: width / 2 - self.width / 2, height / 2 - self.height / 2
+    canvas:
+        # Background color
+        Color:
+            rgba: (.93, .93, .93, 1)
+        # Rectangle covers background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    DefButton:
+        id: retrieve_data
+        pos: WIDTH / 2 - self.width / 2, HEIGHT / 2 - self.height / 2
         text: 'Retrieve Data'
-        on_press: root.init()
+        on_release: root.init()
