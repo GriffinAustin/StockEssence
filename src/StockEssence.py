@@ -33,7 +33,6 @@ class StockEssenceApp(App):
         root.add_widget(StockEssence())
         root.add_widget(Line())
         return root
-        #return StockEssence()
 
     def main(self, btn):
         start = timeit.default_timer()
@@ -46,16 +45,16 @@ class StockEssenceApp(App):
         print("run time:", stop - start, "seconds")
 
 
-def get_stock_symbols(file):
+def get_stock_symbols(filename):
     '''Reads txt file and returns first
     grouped characters'''
     companies = []
-    with open(file, "r") as fileObj:
+    with open(filename, "r") as fileObj:
         for line in fileObj:
             companies.append(line.split()[0])
     return companies[1:]
 
-def write_json(file, companiesList):
+def write_json(filename, companiesList):
     '''Logs company data to file for increased speed in future loads'''
     data = {}
     data['Companies'] = []    
@@ -77,11 +76,11 @@ def write_json(file, companiesList):
                 'Price to Earnings': str(ratio.price_to_earnings(float(stock.get_share_price()), ratio.earnings_per_share(int(companyStatement.get_gross_profit()), float(stock.get_number_of_outstanding_shares()))))
             })
             print(company, 'done')
-        except:
+        except KeyError:
             print(company, 'failed')
         index = int(companiesList.index(company))+1
         print(index, "/", len(companiesList))
-    with open(file, 'w') as outfile:
+    with open(filename, 'w') as outfile:
             json.dump(data, outfile, indent=4)
             print("wrote to json")
 
