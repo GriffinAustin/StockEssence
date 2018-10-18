@@ -44,12 +44,10 @@
         pos_hint: {'center_x': 0.5, 'center_y': .5}
         text: 'Retrieve Data'
         on_release: root.init()
-        on_press: print(root.width)
 
     DefLabel:
         id: label_dashboard
         font_size: 32
         text: 'Dashboard'
         pos_hint: {'top': 1.45}
-
         pos: root.width / 2 * 0.96 * -1 + self.texture_size[0] / 2, self.pos[1]
