@@ -1,37 +1,55 @@
 #: kivy 1.10.1
-#:set WIDTH 800
-#:set HEIGHT 600
+#:import math math
 
 <DefButton@Button>:
-    #:set WIDTH_ADDER 16
-    #:set HEIGHT_MULTIPLIER 1.5625
-    font_size: 32
+    font_size: self.height * 0.6
     font_name: 'OpenSans'
-    width: self.texture_size[0] + WIDTH_ADDER # Auto scale width
-    height: self.font_size * HEIGHT_MULTIPLIER  # Auto scale height
     background_normal: ''
     background_down: ''
-    background_color: (.83, .83, .83, 0)
-    color: .44, .44, .44, 1
+    background_color: (0.83, 0.83, 0.83, 0.0)
+    color: 0.44, 0.44, 0.44, 1.0
     canvas.before:
         Color:
-            rgba: (.83,.83,.83,1) if self.state=='normal' else (.73, .73, .73, 1)
+            rgba: (0.83, 0.83, 0.83, 1.0) if self.state=='normal' else (0.73, 0.73, 0.73, 1.0)
         RoundedRectangle:
             pos: self.pos
             size: self.size
             radius: [4,]
 
+<DefLabel@Label>:
+    font_name: 'OpenSans'
+    color: 0.44, 0.44, 0.44, 1.0
+
+<Line>:
+    canvas:
+        Color:
+            rgba: (0.83, 0.83, 0.83, 1.0)
+        Line:
+            width: 1
+            points: root.width * 0.02, root.height * 0.9, root.width * 0.98, root.height * .9
+
 <StockEssence>:
     canvas:
         # Background color
         Color:
-            rgba: (.93, .93, .93, 1)
+            rgba: (0.93, 0.93, 0.93, 1.0)
         # Rectangle covers background
         Rectangle:
             pos: self.pos
             size: self.size
+
     DefButton:
         id: retrieve_data
-        pos: WIDTH / 2 - self.width / 2, HEIGHT / 2 - self.height / 2
+        size_hint: 0.26, 0.08
+        pos_hint: {'center_x': 0.5, 'center_y': .5}
         text: 'Retrieve Data'
         on_release: root.init()
+        on_press: print(root.width)
+
+    DefLabel:
+        id: label_dashboard
+        font_size: 32
+        text: 'Dashboard'
+        pos_hint: {'top': 1.45}
+
+        pos: root.width / 2 * 0.96 * -1 + self.texture_size[0] / 2, self.pos[1]
