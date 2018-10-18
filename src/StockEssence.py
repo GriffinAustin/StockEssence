@@ -15,7 +15,6 @@ kivy.require('1.10.1')
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
-from kivy.config import Config
 from kivy.core.text import LabelBase
 # Register fonts
 LabelBase.register(name='OpenSans', fn_regular="OpenSans-Regular.ttf")
