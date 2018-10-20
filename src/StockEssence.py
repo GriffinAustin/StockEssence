@@ -12,6 +12,9 @@ import timeit       # Benchmarking
 import kivy
 kivy.require('1.10.1')
 
+from kivy.config import Config
+# Prevents right-clicking from creating red dots (part of baseline Kivy)
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
