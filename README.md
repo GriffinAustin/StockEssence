@@ -42,7 +42,7 @@ $ pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
 Simply clone or download repository
 
 ## Usage
-Edit the list in src/data/my_companies.txt (One company symbol per line, leave the first line alone)
+Edit the list in src/my_companies.txt (One company symbol per line, leave the first line alone)
 
 Navigate to the /src/ folder
 ```
@@ -58,7 +58,7 @@ $ python StockEssence.py
 
 ## Contributing
 
-Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
