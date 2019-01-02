@@ -1,7 +1,0 @@
-List of symbols to retrieve data from (DO NOT EDIT THIS LINE; One company per line)
-AAPL
-MSFT
-AMZN
-Z
-FB
-PG

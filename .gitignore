@@ -1,5 +1,1 @@
-.idea/*
-.vs/*
-src/__pycache__/*
-*.pyc
-src/companydata.json
+deprecated/

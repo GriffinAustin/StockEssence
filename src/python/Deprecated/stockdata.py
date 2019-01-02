@@ -45,3 +45,4 @@ class share_info(object):
     def get_number_of_outstanding_shares(self):
         '''Returns current number stock's of outstanding shares'''
         return(str(int(self.d[str(self.symbol)]['MktCap']) / int(self.d[str(self.symbol)]['Price'])))
+		
