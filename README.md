@@ -33,29 +33,27 @@ Install Python requests module:
 ```
 $ pip install requests
 ```
-Install Python kivy module & dependencies:
-```
-$ pip install kivy
-$ pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
-```
 
 ### Installing
 
 Simply clone or download repository
 
 ## Usage
-Edit the list in src/my_companies.txt (One company symbol per line, leave the first line alone)
 
-Navigate to the /src/ folder
+Navigate to the src/python folder abd run the following command
 ```
-$ python StockEssence.py
+$ python stockessence.py [args]
 ```
-*Note: Initial load may take up to 1 second per symbol*
+where "[args]" is a list of stock symbols (case insensitive)
+e.g.
+```
+$ python stockessence.py AAPL msft Fb
+```
+will display data for AAPL (Apple), MSFT (Microsoft), and FB (Facebook).
 
 ## Built With
 
 * [Requests module for Python](http://docs.python-requests.org/en/master/) - Web API calls
-* [kivy module for Python](https://kivy.org/) - GUI
 * [Financial Modeling Prep](https://financialmodelingprep.com/) - Stock Data
 
 ## Contributing
