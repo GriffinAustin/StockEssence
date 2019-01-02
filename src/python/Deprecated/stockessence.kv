@@ -1,0 +1,72 @@
+#: kivy 1.10.1
+#:import math math
+
+
+<DefButton@Button>:
+    font_size: self.height * 0.6
+    font_name: 'OpenSans'
+    background_normal: ''
+    background_down: ''
+    background_color: (0.83, 0.83, 0.83, 0.0)
+    color: 0.44, 0.44, 0.44, 1.0
+    canvas.before:
+        Color:
+            rgba: (0.83, 0.83, 0.83, 1.0) if self.state=='normal' else (0.73, 0.73, 0.73, 1.0)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [4,]
+
+
+<DefLabel@Label>:
+    font_name: 'OpenSans'
+    color: 0.44, 0.44, 0.44, 1.0
+
+
+<Line>:
+    canvas:
+        Color:
+            rgba: (0.83, 0.83, 0.83, 1.0)
+        Line:
+            width: 1
+            points: root.width * 0.02, root.height * 0.9, root.width * 0.98, root.height * .9
+
+
+<StockEssence>:
+    canvas:
+        # Background color
+        Color:
+            rgba: (0.93, 0.93, 0.93, 1.0)
+        # Rectangle covers background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    DefButton:
+        id: button_retrieve_data
+        size_hint: 0.26, 0.08
+        pos_hint: {'center_x': 0.5, 'center_y': .5}
+        text: 'Retrieve Data'
+        on_release: root.init()
+
+    DefButton:
+        id: button_dashboard
+        font_size: self.height * 0.6
+        text: 'Dashboard'
+        pos: root.width * 0.02, root.height - self.height - root.height * 0.013
+        size_hint: 0.26, 0.08
+        on_press: print(app.val)
+
+    DefLabel:
+        id: label_progress
+        font_size: button_retrieve_data.font_size
+        text: 'Progress'
+        pos_hint: {'center_x': 0.5}
+        pos: self.pos[0], root.height / -2 * 0.25
+
+    DefLabel:
+        id: label_progress_value
+        font_size: label_progress.font_size
+        text: '0 / 0'
+        pos_hint: {'center_x': 0.5}
+        pos: self.pos[0], label_progress.pos[1] - label_progress.texture_size[1]
