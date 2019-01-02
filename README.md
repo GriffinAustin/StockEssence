@@ -40,7 +40,7 @@ Simply clone or download repository
 
 ## Usage
 
-Navigate to the src/python folder abd run the following command
+Navigate to the src/python folder and run the following command
 ```
 $ python stockessence.py [args]
 ```
