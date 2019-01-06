@@ -42,12 +42,12 @@ Simply clone or download repository
 
 Navigate to the src/python folder and run the following command
 ```
-$ python stockessence.py [args]
+$ python3 stockessence.py [args]
 ```
 where "[args]" is a list of stock symbols (case insensitive)
 e.g.
 ```
-$ python stockessence.py AAPL msft Fb
+$ python3 stockessence.py AAPL msft Fb
 ```
 will display data for AAPL (Apple), MSFT (Microsoft), and FB (Facebook).
 
